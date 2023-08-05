@@ -1,5 +1,7 @@
 package security.services;
 
-public interface RoleService {
+import security.entities.RoleEntity;
 
+public interface RoleService {
+    RoleEntity getRoleByName(String roleName);
 }

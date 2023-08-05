@@ -1,12 +1,12 @@
 package security.dtos;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-public class UserDto {
-    private Integer Id;
+@Builder
+public class InfoUserDto {
+    private String username;
     private String firstName;
     private String lastName;
 }

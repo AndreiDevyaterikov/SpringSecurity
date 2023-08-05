@@ -1,3 +1,6 @@
+create sequence users_id_seq start 5;
+create sequence users_credentials_id_seq start 5;
+
 create table if not exists roles
 (
     id   integer primary key,
