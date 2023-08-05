@@ -2,7 +2,7 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema="test"
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema="security"
     username: postgres
     password: root
   jpa:
@@ -15,4 +15,4 @@ jwt:
   lifetime: 120m
 springdoc:
   swagger-ui:
-    path: /test.html
+    path: /security.html

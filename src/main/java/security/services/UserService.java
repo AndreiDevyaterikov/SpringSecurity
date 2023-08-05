@@ -1,7 +1,16 @@
 package security.services;
 
-import security.dtos.UserDto;
+import security.dtos.EditUserRolesDto;
+import security.dtos.InfoUserDto;
+import security.entities.UserEntity;
+import security.response.ResponseModel;
+
+import java.util.Optional;
 
 public interface UserService {
-    UserDto getUserByLastAndFirstName(String lastName, String firstName);
+    void saveUser(UserEntity userEntity);
+    InfoUserDto getUserInfo(String token);
+    ResponseModel setRolesToUser(EditUserRolesDto editUserRolesDto);
+
+    Optional<UserEntity> getUserById(Integer userId);
 }

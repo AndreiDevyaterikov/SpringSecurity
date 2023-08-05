@@ -34,17 +34,19 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         httpSecurity.authorizeHttpRequests(customizer -> customizer
-                .requestMatchers("/api/admin").hasAuthority("ADMIN")
+                .requestMatchers("/api/addRolesToUser").hasAuthority("ADMIN")
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest()
-                .permitAll());
+                .permitAll()
+        );
         httpSecurity.sessionManagement(customizer -> customizer
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        );
         httpSecurity.exceptionHandling(customizer -> customizer
                 .authenticationEntryPoint(authenticationEntryPoint())
-                .accessDeniedHandler(accessDeniedHandler()));
+                .accessDeniedHandler(accessDeniedHandler())
+        );
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
 
         return httpSecurity.build();
     }
@@ -52,7 +54,7 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userService);
         return daoAuthenticationProvider;
     }
@@ -71,5 +73,10 @@ public class SecurityConfig {
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return new CustomAuthenticationEntryPoint();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

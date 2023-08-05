@@ -1,9 +1,10 @@
 package security.services;
 
 import security.entities.UserCredentialsEntity;
-import security.entities.UserEntity;
+
+import java.util.Optional;
 
 public interface UserCredentialsService {
-    UserCredentialsEntity getCredentialsByUser(UserEntity userEntity);
-    UserCredentialsEntity getCredentialsByUsername(String username);
+    Optional<UserCredentialsEntity> getCredentialsByUsername(String username);
+    void saveUserCredentials(UserCredentialsEntity userCredentialsEntity);
 }
