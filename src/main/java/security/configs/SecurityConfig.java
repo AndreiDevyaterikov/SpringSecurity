@@ -34,7 +34,7 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         httpSecurity.authorizeHttpRequests(customizer -> customizer
-                .requestMatchers("/api/admin").hasAuthority("ADMIN")
+                .requestMatchers("/api/addRolesToUser").hasAuthority("ADMIN")
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest()
                 .permitAll()
