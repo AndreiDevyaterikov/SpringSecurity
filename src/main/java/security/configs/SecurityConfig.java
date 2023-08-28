@@ -35,6 +35,7 @@ public class SecurityConfig {
 
         httpSecurity.authorizeHttpRequests(customizer -> customizer
                 .requestMatchers("/api/addRolesToUser").hasAuthority("ADMIN")
+                .requestMatchers("/api/getUserByLastAndFirstName").hasAuthority("ADMIN")
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest()
                 .permitAll()

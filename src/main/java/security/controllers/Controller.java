@@ -2,11 +2,10 @@ package security.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import security.dtos.EditUserRolesDto;
 import security.dtos.InfoUserDto;
+import security.entities.UserEntity;
 import security.response.ResponseModel;
 import security.services.UserService;
 
@@ -29,5 +28,13 @@ public class Controller {
     @PostMapping("/addRolesToUser")
     public ResponseModel admin(EditUserRolesDto editUserRolesDto) {
         return userService.setRolesToUser(editUserRolesDto);
+    }
+
+    @GetMapping("/getUserByLastAndFirstName")
+    public UserEntity getUserByLastAndFirstName(
+            @RequestParam String firstName,
+            @RequestParam String lastName
+    ) {
+        return userService.getUserByFirstAndLastName(firstName, lastName);
     }
 }

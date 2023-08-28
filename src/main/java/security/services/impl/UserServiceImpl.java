@@ -14,6 +14,7 @@ import security.dtos.EditUserRolesDto;
 import security.dtos.InfoUserDto;
 import security.entities.RoleEntity;
 import security.entities.UserEntity;
+import security.exceptions.SecurityNotFoundException;
 import security.exceptions.SpringSecurityException;
 import security.repositories.UserRepository;
 import security.response.ResponseModel;
@@ -101,6 +102,19 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public Optional<UserEntity> getUserById(Integer userId) {
         return userRepository.findById(userId);
+    }
+
+    @Override
+    public UserEntity getUserByFirstAndLastName(String firstName, String lastName) {
+        var existUserOpt = userRepository.findByFirstNameAndLastName(firstName, lastName);
+        return existUserOpt.orElseThrow(() -> {
+            var message = String.format(
+                    "Not found user %s %s",
+                    firstName, lastName
+            );
+            log.warn(message);
+            return new SecurityNotFoundException(message);
+        });
     }
 
     private SpringSecurityException notFoundCredentials(String username) {

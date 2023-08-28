@@ -13,4 +13,5 @@ public interface UserService {
     ResponseModel setRolesToUser(EditUserRolesDto editUserRolesDto);
 
     Optional<UserEntity> getUserById(Integer userId);
+    UserEntity getUserByFirstAndLastName(String firstName, String lastName);
 }
